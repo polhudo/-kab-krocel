@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab PROCEL | Sobre Institucional</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Usa a mesma tag style base para manter o padrão -->
+    <style>
+        :root { --color-primary: #0056b3; --color-secondary: #00a859; --color-accent: #9fe510; --color-dark: #0A1725; --bg-light: #f8f9fa; --text-main: #333333; --text-muted: #666666; --font-main: "Segoe UI", Roboto, Arial, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: var(--font-main); color: var(--text-main); line-height: 1.6; } a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; padding: 15px 0; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        nav ul { display: flex; gap: 20px; align-items: center; list-style: none; } nav a { font-weight: 600; color: var(--text-main); font-size: 0.95rem; text-transform: uppercase; } nav a:hover, nav a.active { color: var(--color-primary); }
+        .btn-nav { background-color: var(--color-primary); color: #fff !important; padding: 10px 24px; border-radius: 4px; font-weight: bold; cursor: pointer; border: none; font-size: 0.95rem;} .btn-nav:hover { background-color: var(--color-secondary); }
+        
+        .page-header { background: var(--bg-light); padding: 60px 0; border-bottom: 1px solid #eee; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; color: var(--color-dark); margin-bottom: 10px; }
+
+        .content-section { padding: 80px 0; }
+        .info-block { margin-bottom: 60px; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid var(--color-primary); }
+        .info-block h2 { color: var(--color-primary); margin-bottom: 15px; }
+        .info-block p { color: var(--text-muted); margin-bottom: 15px; }
+        .info-block a { color: var(--color-secondary); font-weight: bold; text-decoration: underline; }
+
+        .history-callout { background: var(--color-primary);; color: #fff; padding: 60px; border-radius: 8px; text-align: center; margin-top: 40px;}
+        .history-callout h3 { font-size: 2rem; margin-bottom: 15px; color: var(--color-accent);}
+        .history-callout p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+        .btn-history { background: var(--color-accent); color: var(--color-dark); padding: 14px 30px; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; }
+
+         /* =========================================
+           9. FOOTER CORPORATIVO
+           ========================================= */
+        footer {
+            background-color: var(--color-dark);
+            color: #ffffff;
+            padding: 10px 0 2px;
+        }
+        .footer-grid {
+			display: grid;
+			gap: 40px;
+			margin-bottom: 0px;
+			grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-col h4 { color: var(--color-accent); margin-bottom: 5px; font-size: 1.2rem; }
+        .footer-col p { opacity: 0.8; margin-bottom: 5px; font-size: 0.95rem; }
+        .footer-bottom { text-align: center; padding-top: 0px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.5; font-size: 0.85rem; }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px) {
+            .about-grid, .edital-grid, .footer-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; } /* Simulação de menu escondido no mobile */
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+		  <div class="container">
+			<nav class="navbar navbar-expand-lg" style="width: 100%;">
+
+			  <!-- LOGO (esquerda) -->
+			  <a class="navbar-brand" href="index.html">
+				<img src="https://i.ibb.co/F1dxm7j/Artboard-2logos.png" style="height: 50px;">
+			  </a>
+
+			  <!-- BOTÃO HAMBÚRGUER -->
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <!-- MENU (direita) -->
+			  <div class="collapse navbar-collapse" id="menuNav">
+				<ul class="navbar-nav ms-auto">
+				  <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase2.html">Fase 2 - 2026</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase1.html">Fase 1 - 2020</a></li>
+				  <li class="nav-item"><a class="nav-link" href="imprensa.html">Imprensa</a></li>
+				  <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContato">
+					  Fale Conosco
+					</a>
+				  </li>
+				</ul>
+			  </div>
+
+			</nav>
+		  </div>
+	</header>
+
+    <div class="row">
+	  <div class="col-12 position-relative" style="background: #4f7e25">
+
+		<!-- IMAGEM -->
+		<img src="banner_sobre.png" class="img-fluid w-100" style="opacity: 0.5"/>
+
+		<!-- TEXTO SOBREPOSTO -->
+		<div class="position-absolute top-50 start-0 translate-middle-y w-100">
+		  <div class="container">
+			<div class="row">
+			  <div class="col-10 col-md-8 col-lg-6 text-white" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6);">
+				<h1 class="fw-bold">Sobre</h1>
+				<p>Conheça mais sobre nossas iniciativas e objetivos.</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+    <main class="content-section">
+        <div class="container">
+            
+            <div class="info-block">
+                <h2>O Lab Procel</h2>
+                <p>A articulação de parcerias com startups e pequenas empresas de base tecnológica vem se consolidando, no Brasil e internacionalmente, como uma das estratégias mais eficazes para impulsionar a inovação com maior agilidade, menor custo e elevada aderência às demandas reais do mercado. Nesse cenário, destacam-se as iniciativas de inovação aberta conduzidas pelo SENAI, em parceria com grandes instituições públicas e privadas, que conectam desafios concretos do setor produtivo à expertise técnica, científica e à robusta infraestrutura de sua rede nacional de Institutos de Inovação.</p> 
+				<p>Em 2020, com recursos do Procel, foi lançado o Lab Procel, concebido como uma estrutura física e metodológica voltada à pré-aceleração e aceleração de startups e pequenas empresas com foco em soluções inovadoras em eficiência energética.</p>
+            </div>
+
+            <div class="info-block">
+                <h2>A ENBPar</h2>
+                <p>A ENBPar (Empresa Brasileira de Participações em Energia Nuclear e Binacional S.A) é uma empresa pública vinculada ao Ministério de Minas e Energia.</p>
+				<p>Foi criada pela lei nº 14.182, de 2021, e constituída em 2022, com o objetivo de manter sob o controle da União a operação de usinas nucleares e outras funções atribuídas à Eletrobras antes de sua privatização.</p>
+                <a href="https://enbpar.gov.br/" target="_blank">Conheça a ENBPar</a>
+            </div>
+			<div class="info-block">
+                <h2>FIRJAN</h2>
+				<p>Desenvolver a indústria é fundamental para a economia. Mas não é só isso. Desenvolver a indústria gera emprego e renda, amplia e cria novos negócios, estimula a inovação tecnológica e tudo isso é fundamental, também, para o desenvolvimento pleno do estado do Rio e de toda a sociedade.</p>
+				<p>Garantir o crescimento sustentável da indústria é a nossa missão. Representamos todas as indústrias do estado do Rio, que conta com 101 sindicatos, mais de 6.000 colaboradores, 304 estagiários espalhados entre os 22 municípios e 93 jovens aprendizes.</p>
+                <a href="https://www.firjan.com.br/" target="_blank">Conheça a FIRJAN</a>
+            </div>
+
+            <div class="info-block">
+                <h2>FIRJAN SENAI</h2>
+                <p>Desde a aprendizagem industrial, formamos profissionais altamente qualificados para os diversos setores industriais, aliando a teoria da sala de aula com a prática intensiva em oficinas e laboratórios modernos, que refletem a realidade da indústria atual.</p> 
+				<p>No final do curso, o profissional da Firjan SENAI está pronto para qualquer desafio. E, ao formar o melhor profissional para a indústria, estamos, também, formando melhores cidadãos. Com inovação, pavimentamos o caminho para a indústria se desenvolver. Com institutos de tecnologia, instituto de inovação e núcleos de tecnologia, oferecemos soluções tecnológicas customizadas e indispensáveis para a indústria ser mais competitiva, tecnológica e atualizada.</p>
+                <a href="https://www.firjan.com.br/senai/" target="_blank">Conheça FIRJAN SENAI</a>
+            </div>
+
+            <!-- LINK INTERNO BEM SINALIZADO PARA O HISTÓRICO FASE 1 -->
+            <div class="history-callout">
+                <h3>Fase 1 - 2020</h3>
+                <p>Conheça as soluções aceleradas no Lab Procel Fase 1 – 2020 e os resultados do programa</p>
+                <a href="fase1.html" class="btn-history">Lab Procel Fase 1 - 2020</a>
+            </div>
+
+        </div>
+    </main>
+
+    
+		<!-- FOOTER ESTILO FIRJAN/IEL -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Fale com a Firjan</h4>
+                    <p>Segunda à sexta-feira, de 9h às 18h</p>
+                    <p><strong>4002 0231</strong> (Custo de Ligação local)</p>
+                </div>
+                <div class="footer-col">
+                    <p><strong>0800 0231 231</strong> <span style="font-size: 0.80rem;">(Ligações gratuitas de telefone fixo no RJ)</span></p>
+                    <p>Email: <a href="mailto:labprocel@firjan.com.br" style="text-decoration: underline;">labprocel@firjan.com.br</a></p>
+					<p style="font-size: 0.80rem;">&copy; 2026 - Todos os direitos reservados à Firjan e Lab PROCEL.</p>
+				</div>
+				<div class="footer-col">
+                    <p><a href="https://www.linkedin.com/company/empresa-brasileira-de-participa%C3%A7%C3%B5es-em-energia-nuclear-e-binacional-s-a-enbpar" target="_blank">LinkedIn ENBPar</a></p>
+                    <p><a href="https://www.instagram.com/enbpar" target="_blank">Instagram ENBPar</a></p>
+                    <p><a href="https://www.linkedin.com/company/firjan" target="_blank">LinkedIn Firjan</a></p>
+                    
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		<!--PARTE DO MODAL DO FALE CONOSCO -->
+		<div class="modal fade" id="modalContato" tabindex="-1">
+			  <div class="modal-dialog modal-lg">
+				<div class="modal-content glass-card" style="background: #ddd; color: #000">
+
+				  <div class="modal-header">
+					<h5 class="modal-title">Fale Conosco</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				  </div>
+
+				  <div class="modal-body">
+
+					<form id="formContato">
+
+					  <!-- Nome Completo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome Completo</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Organização -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome da Organização</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control">
+						</div>
+					  </div>
+
+					  <!-- Email -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">E-mail</label>
+						<div class="col-md-8">
+						  <input type="email" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Celular -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Celular</label>
+						<div class="col-md-8">
+						  <input type="text" id="celular" class="form-control" placeholder="(00) 00000-0000" required>
+						</div>
+					  </div>
+
+					  <!-- Motivo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Motivo do Contato</label>
+						<div class="col-md-8">
+						  <select class="form-select" required>
+							<option value="">Selecione</option>
+							<option>Dúvidas</option>
+							<option>Sugestões</option>
+							<option>Outros</option>
+						  </select>
+						</div>
+					  </div>
+
+					  <!-- Mensagem -->
+					  <div class="row mb-3">
+						<label class="form-label col-md-4">Deixe sua mensagem</label>
+						<div class="col-md-8">
+						  <textarea class="form-control" rows="4" required></textarea>
+						</div>
+					  </div>
+
+					  <!-- Termos -->
+					  <div class="row mb-2">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox" id="termos" required>
+							<label class="form-check-label">
+							  Li e aceito os termos e condições de uso
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Comunicações -->
+					  <div class="row mb-3">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox">
+							<label class="form-check-label">
+							  Aceito receber comunicações da Firjan
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					 <!-- Botão -->
+					  <div class="row">
+						<div class="col-md-8 offset-md-4">
+							<button type="submit" class="btn btn-history">
+								Enviar
+							</button>
+						</div>
+					  </div>
+
+					</form>
+
+					<div id="mensagemSucesso" class="alert alert-success mt-3" style="display:none;">
+					  Mensagem enviada com sucesso! Retornaremos seu contato em breve.
+					</div>
+
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+		
+		
+		
+	
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

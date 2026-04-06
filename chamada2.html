@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamada 2 | Lab PROCEL</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root { --color-primary: #0056b3; --color-secondary: #00a859; --color-accent: #9fe510; --color-dark: #0A1725; --bg-light: #f8f9fa; --text-main: #333333; --text-muted: #666666; --font-main: "Segoe UI", Roboto, Arial, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: var(--font-main); color: var(--text-main); line-height: 1.6; background: #fff; } a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; padding: 15px 0; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        nav ul { display: flex; gap: 20px; align-items: center; list-style: none; } nav a { font-weight: 600; color: var(--text-main); font-size: 0.95rem; text-transform: uppercase; } nav a:hover, nav a.active { color: var(--color-primary); }
+        
+        /* Chamada Header Specific */
+        .call-header { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%); color: #fff; padding: 80px 0; }
+        .breadcrumb { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
+        .breadcrumb a:hover { color: var(--color-accent); text-decoration: underline;}
+        .call-header h1 { font-size: 3rem; color: var(--color-accent); margin-bottom: 10px; }
+
+        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; }
+        .video-card { background: var(--bg-light); padding: 20px; border-radius: 8px; border: 1px solid #eee; text-align: center;}
+        .video-card h3 { margin-bottom: 15px; font-size: 1.2rem; color: var(--color-primary); }
+        .video-placeholder { width: 100%; aspect-ratio: 16/9; background: #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #888; font-weight: bold; }
+        
+        .action-box { text-align: center; padding: 60px; background: var(--bg-light); border-radius: 8px; margin: 40px 0;}
+        .btn-large { background: var(--color-secondary); color: #fff; padding: 15px 40px; font-size: 1.2rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-top: 20px;}
+		
+		 /* =========================================
+           9. FOOTER CORPORATIVO
+           ========================================= */
+        footer {
+            background-color: var(--color-dark);
+            color: #ffffff;
+            padding: 10px 0 2px;
+        }
+
+
+
+		.footer-grid {
+			display: grid;
+			gap: 40px;
+			margin-bottom: 0px;
+			grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-col h4 { color: var(--color-accent); margin-bottom: 5px; font-size: 1.2rem; }
+        .footer-col p { opacity: 0.8; margin-bottom: 5px; font-size: 0.95rem; }
+        .footer-bottom { text-align: center; padding-top: 0px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.5; font-size: 0.85rem; }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px) {
+            .about-grid, .edital-grid, .footer-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; } /* Simulação de menu escondido no mobile */
+            .hero h1 { font-size: 2.2rem; }
+        }
+		
+		.section-box { padding: 60px 0; }
+        .section-title { font-size: 2rem; color: var(--color-dark); margin-bottom: 30px; text-align: center; border-bottom: 2px solid var(--color-primary); display: inline-block; padding-bottom: 10px;}
+		
+        .schedule-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 40px; }
+        .schedule-box ul { list-style: none; }
+        .schedule-box li { padding: 15px 0; border-bottom: 1px solid #eee;}
+        .schedule-box li strong { color: var(--color-primary); }
+		
+		
+		/* Grid Central para os cards das Chamadas (Atendendo aos 3 cliques) */
+        .chamadas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .chamada-card { background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid var(--color-secondary); transition: 0.3s;}
+        .chamada-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .chamada-card h3 { font-size: 1.5rem; color: var(--color-primary); margin-bottom: 15px; }
+        .chamada-card p { color: var(--text-muted); margin-bottom: 25px; }
+        .btn-chamada { display: inline-block; background: var(--color-dark); color: #fff; padding: 12px 25px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .btn-chamada:hover { background: var(--color-primary); }
+	
+		
+		
+		
+		/*PARTE CRONOGRAMA*/	
+		.timeline {
+		  position: relative;
+		  padding-left: 30px;
+		  border-left: 3px solid #0d6efd;
+		}
+
+		.timeline-item {
+		  margin-bottom: 40px;
+		  position: relative;
+		}
+
+		.timeline-item::before {
+		  content: "";
+		  position: absolute;
+		  left: -11px;
+		  top: 5px;
+		  width: 18px;
+		  height: 18px;
+		  border-radius: 50%;
+		}
+
+		.fase {
+		  font-weight: bold;
+		  color: #0d6efd;
+		  margin-bottom: 15px;
+		}
+
+		
+		.data {
+		  font-weight: bold;
+		  color: #0d6efd;
+		
+		  min-width: 120px;
+		  text-align: right;
+		  white-space: nowrap;
+
+		}
+
+		/* BOTÃO CLIQUE AQUI */
+		.btn-clique {
+		  margin-left: 10px;
+		  padding: 4px 10px;
+		  font-size: 12px;
+		  border-radius: 20px;
+		  background: linear-gradient(45deg, #0d6efd, #6610f2);
+		  color: #fff;
+		  text-decoration: none;
+		  transition: 0.3s;
+		}
+
+		.btn-clique:hover {
+		  transform: scale(1.05);
+		  background: linear-gradient(45deg, #6610f2, #0d6efd);
+		}
+
+    </style>
+</head>
+<body>
+
+    <header>
+		  <div class="container">
+			<nav class="navbar navbar-expand-lg" style="width: 100%;">
+
+			  <!-- LOGO (esquerda) -->
+			  <a class="navbar-brand" href="index.html">
+				<img src="https://i.ibb.co/F1dxm7j/Artboard-2logos.png" style="height: 50px;">
+			  </a>
+
+			  <!-- BOTÃO HAMBÚRGUER -->
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <!-- MENU (direita) -->
+			  <div class="collapse navbar-collapse" id="menuNav">
+				<ul class="navbar-nav ms-auto">
+				  <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase2.html">Fase 2 - 2026</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase1.html">Fase 1 - 2020</a></li>
+				  <li class="nav-item"><a class="nav-link" href="imprensa.html">Imprensa</a></li>
+				  <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContato">
+					  Fale Conosco
+					</a>
+				  </li>
+				</ul>
+			  </div>
+
+			</nav>
+		  </div>
+	</header>
+
+	
+	<div class="row">
+	  <div class="col-12 position-relative" style="background: #4f7e25">
+
+		<!-- IMAGEM -->
+		<img src="banner_chamada2.png" class="img-fluid w-100" style="opacity: 0.5"/>
+
+		<!-- TEXTO SOBREPOSTO -->
+		<div class="position-absolute top-50 start-0 translate-middle-y w-100">
+		  <div class="container">
+			<div class="row">
+			  <div class="col-10 col-md-8 col-lg-6 text-white" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6);">
+				<h1 class="fw-bold">Chamada 2</h1>
+				<p>Cidades Inteligentes com Ênfase em Eficiência Energética</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+    <main class="container">
+        
+        <div class="action-box">
+            <h2 style="color: var(--color-dark); margin-bottom: 10px;">CIDADES INTELIGENTES COM ÊNFASE EM EFICIÊNCIA ENERGÉTICA</h2>
+            <p style="color: var(--text-muted);">Acesse o edital e verifique a documentação necessária para sua participação</p>
+            <a href="Edital LAB PROCEL II_2a chamada.pdf" class="btn-large" style="background: var(--color-primary); margin-right: 15px;" target="_blank">Edital</a>
+            <a href="Anexos 2º Chamada Lab Procel.zip" class="btn-large" style="background: var(--color-primary); margin-right: 15px;" target="_blank">Anexos</a>
+            <a href="https://plataforma-edital.editaldeinovacao.com.br/plataforma/chamada-tematica/interna/961" class="btn-large" style="background: var(--color-primary); margin-right: 15px;" target="_blank">Inscreva-se</a>
+        </div>
+		
+		
+<section class="container my-5">
+ <div style="text-align: center;"><h2 class="section-title">Cronograma da Chamada 2</h2></div>
+
+  <div class="timeline">
+
+    <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Submissão</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+          <div class="flex-grow-1">
+            Abertura da Chamada Pública 
+            <a href="Edital LAB PROCEL II_2a chamada.pdf" class="btn-clique">CLIQUE AQUI</a>
+          </div>
+          <span class="data ms-3">30/03/2026</span>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Webinar – Dúvidas da chamada</div>
+          <span class="data ms-3">09/04/2026</span>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Prazo-limite para envio de dúvidas sobre o edital – até às 17:00:00, horário de Brasília</div>
+          <span class="data ms-3">22/04/2026</span>
+        </div>
+      </div> 
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Fim do prazo para submissão dos documentos – até às 23:59, horário de Brasília</div>
+          <span class="data ms-3">26/04/2026</span>
+        </div>
+      </div>
+	  
+		<div class="card mb-3 shadow-sm">
+			<div class="card-body d-flex justify-content-between flex-wrap">
+			  <div class="flex-grow-1">Divulgação da lista preliminar de Proponentes com documentação aprovada/reprovada: APTA/INAPTA  
+			</div>
+			  <span class="data ms-3">11/05/2026</span>
+		  </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+			<div class="card-body d-flex justify-content-between flex-wrap">
+			  <div class="flex-grow-1">Interposição de recursos referentes à reprovação da documentação apresentada –<br/> até às 17:00:00, horário de Brasília  
+			</div>
+			  <span class="data ms-3">12/05/2026</span>
+		  </div>
+      </div>
+<div class="card mb-3 shadow-sm">
+			<div class="card-body d-flex justify-content-between flex-wrap">
+			  <div class="flex-grow-1"> Divulgação da lista final de Proponentes com documentação aprovada/reprovada: APTA/INAPTA  
+			</div>
+			  <span class="data ms-3">15/05/2026</span>
+		  </div>
+      </div>
+
+    </div>
+	
+	
+	
+	
+	
+
+    <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Pré-Habilitação</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+				Análise de aderência ao tema da chamada e/ou grau de inovação/nível de maturidade tecnológica (TRL)        
+          </div>
+          <span class="data ms-3">16/05/2026 a 24/05/2026</span>
+        </div>
+      </div>
+	  
+	   <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+            Divulgação da lista preliminar de Proponentes pré-habilitadas e inabilitadas para a fase subsequente
+          </div>
+          <span class="data ms-3">26/05/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+            Interposição de recursos referentes à falta de aderência ao tema da chamada e/ou grau de inovação/nível de <br/>maturidade tecnológica (TRL) – até às 17:00:00, horário de Brasília 
+          </div>
+          <span class="data ms-3">27/05/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+            Divulgação da lista final as 17h:00:00 com todas as proponentes consideradas pré-habilitadas após </br>interposição de recursos
+          </div>
+          <span class="data ms-3">29/05/2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Habilitação</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Submissão dos documentos conforme item 9.3 do EDITAL– até às 23:59, horário de Brasília</div>
+          <span class="data ms-3">30/05/2026 a 05/06/2026</span>
+        </div>
+      </div>
+	  
+	   <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Banca online de avaliação mediada por tecnologia de videoconferência</div>
+          <span class="data ms-3">10/06/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Divulgação da lista preliminar de Proponentes selecionados
+		  </div>
+          <span class="data ms-3">17/06/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Interposição de recursos referentes à documentação do Proponente (Fase Habilitação) -<br/> até às 17:00:00, horário de Brasília
+		  </div>
+          <span class="data ms-3">18/06/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">Divulgação da lista final após interposição de recursos dos Proponentes
+		  </div>
+          <span class="data ms-3">22/06/2026</span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Divulgação Final</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+            Divulgação da lista final dos Proponentes aprovados para receber os recursos financeiros
+            
+          </div>
+          <span class="data ms-3">22/06/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+				Divulgação do Cadastro de Reserva
+            
+          </div>
+          <span class="data ms-3">22/06/2026</span>
+        </div>
+      </div>
+    </div>
+	
+	
+	 <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Aceleração</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+			Formalização do contrato de aceleração</div>
+          <span class="data ms-3">Julho/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+				Elaboração do plano de aceleração individual das proponentes
+          </div>
+          <span class="data ms-3">Julho/2026 a Agosto/2026</span>
+        </div>
+      </div>
+	  
+	  <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+				Desenvolvimento dos projetos de aceleração e monitoramento
+          </div>
+          <span class="data ms-3">Agosto/2026 a Setembro/2027</span>
+        </div>
+      </div>
+    </div>
+	
+	
+	 <!-- FASE -->
+    <div class="timeline-item">
+      <h4 class="fase">Graduaçao</h4>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex justify-content-between flex-wrap">
+          <div class="flex-grow-1">
+				Realização de evento de graduação - Demoday
+        </div>
+				<span class="data ms-3">Setembro/2027</span>
+      </div>
+	
+    </div>
+
+  </div>
+</section>
+
+
+		<section class="section-box container">
+			<div style="text-align: center; margin-top: 150px;"><h2 class="section-title">Vídeos da 2ª Chamada</h2></div>
+           
+                
+            
+            <div class="chamadas-grid">
+                
+                <div class="chamada-card">
+					<h3>Evento de Lançamento</h3>
+                    <iframe style="width: 100%" src="https://www.youtube.com/embed/j_qOfmiJxAk?si=x4eCBXoif5DHH9hy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <!-- CHAMADA 2 e 3 seriam estruturalmente idênticas à Chamada 1--> 
+                <div class="chamada-card">
+					<h3>Webinar</h3>
+                    
+                </div>
+                
+                <div class="chamada-card">
+					 <h3>Tutorial</h3>
+                    <video style="width:100%" controls="" preload="metadata">
+						<source src="Lab Procel II-Inscricoes Chamada 02.mp4" type="video/mp4">
+							Seu navegador não suporta vídeo.
+					</video>
+                </div>
+            </div>
+        </section>
+		
+         <!-- MATERIAIS DE APOIO DA CHAMADA 
+        <div class="video-grid">
+            <div class="video-card">
+                <h3>Evento de Lançamento</h3>
+                
+                <div class="video-placeholder">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/j_qOfmiJxAk?si=x4eCBXoif5DHH9hy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				</div>
+            </div>
+           div class="video-card">
+                <h3>Webinar</h3>
+                <div class="video-placeholder">
+					<video style="width:560px; height:315px" controls="" preload="metadata">
+						<source src="#" type="video/mp4">
+							Seu navegador não suporta vídeo.
+					</video></div>
+            </div>
+            <div class="video-card">
+                <h3>Tutorial</h3>
+                <div class="video-placeholder">
+					<video style="width:560px; height:315px" controls="" preload="metadata">
+						<source src="#" type="video/mp4">
+						Seu navegador não suporta vídeo.
+					</video>
+				</div>
+            </div-->
+        </div>
+		
+		<section class="section-box container" id="cronograma">
+            <div style="text-align: center;"><h2 class="section-title">Lista de Eventos</h2></div>
+            
+			<div class="container">
+			  <div class="row">
+
+				<div class="col-md-4">
+				  <a href="https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fprotect.checkpoint.com%2Fv2%2Fr01%2F___https%3A%2F%2Fforms.office.com%2Fr%2FSCg2qdB8NZ%3Forigin%3DlprLink___.YzJ1OmZpcmphbjE6YzpvOmY3NTU2OGNmYTY4ZjM5OTUwNDc2NzgwNmM0MGQwMDliOjc6ZGZjYTpjNTliMjc2MzAyZTkwZWY0MmUxNzY2YjE4MWIxMGE3YTIwMzRlNTkwNmRmNDk5NzIyMTkzN2YwMGZhYzM5MThiOmg6VDpG&data=05%7C02%7Cguisantos%40firjan.com.br%7Cb59547acd6ba4493e80708de8b40e1c8%7Cd0c698d4e4ea4ee9a79df2d7a78399c8%7C0%7C0%7C639101307988509621%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=yKQn3QXhZG5oU8DE1tyvSPhe6i%2F2L3hnonCi8xpbZwI%3D&reserved=0" target="_blank">
+				  <img src="evento_inscricao_chamada2.png" class="img-fluid" alt=""></a>
+				</div>
+				
+
+				<div class="col-md-4">
+				  <a href="https://www.youtube.com/watch?v=j_qOfmiJxAk" target="_blank">
+				  <img src="evento_youtube_cidades_inteligentes.png" class="img-fluid" alt=""></a>
+				</div>
+				
+
+			  </div>
+			</div>
+        </section>
+
+    </main>
+
+		<!-- FOOTER ESTILO FIRJAN/IEL -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Fale com a Firjan</h4>
+                    <p>Segunda à sexta-feira, de 9h às 18h</p>
+                    <p><strong>4002 0231</strong> (Custo de Ligação local)</p>
+                </div>
+                <div class="footer-col">
+                    <p><strong>0800 0231 231</strong> <span style="font-size: 0.80rem;">(Ligações gratuitas de telefone fixo no RJ)</span></p>
+                    <p>Email: <a href="mailto:labprocel@firjan.com.br" style="text-decoration: underline;">labprocel@firjan.com.br</a></p>
+					<p style="font-size: 0.80rem;">&copy; 2026 - Todos os direitos reservados à Firjan e Lab PROCEL.</p>
+				</div>
+				<div class="footer-col">
+                    <p><a href="https://www.linkedin.com/company/empresa-brasileira-de-participa%C3%A7%C3%B5es-em-energia-nuclear-e-binacional-s-a-enbpar" target="_blank">LinkedIn ENBPar</a></p>
+                    <p><a href="https://www.instagram.com/enbpar" target="_blank">Instagram ENBPar</a></p>
+                    <p><a href="https://www.linkedin.com/company/firjan" target="_blank">LinkedIn Firjan</a></p>
+                    
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		<!--PARTE DO MODAL DO FALE CONOSCO -->
+		<div class="modal fade" id="modalContato" tabindex="-1">
+			  <div class="modal-dialog modal-lg">
+				<div class="modal-content glass-card" style="background: #ddd; color: #000">
+
+				  <div class="modal-header">
+					<h5 class="modal-title">Fale Conosco</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				  </div>
+
+				  <div class="modal-body">
+
+					<form id="formContato">
+
+					  <!-- Nome Completo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome Completo</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Organização -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome da Organização</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control">
+						</div>
+					  </div>
+
+					  <!-- Email -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">E-mail</label>
+						<div class="col-md-8">
+						  <input type="email" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Celular -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Celular</label>
+						<div class="col-md-8">
+						  <input type="text" id="celular" class="form-control" placeholder="(00) 00000-0000" required>
+						</div>
+					  </div>
+
+					  <!-- Motivo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Motivo do Contato</label>
+						<div class="col-md-8">
+						  <select class="form-select" required>
+							<option value="">Selecione</option>
+							<option>Dúvidas</option>
+							<option>Sugestões</option>
+							<option>Outros</option>
+						  </select>
+						</div>
+					  </div>
+
+					  <!-- Mensagem -->
+					  <div class="row mb-3">
+						<label class="form-label col-md-4">Deixe sua mensagem</label>
+						<div class="col-md-8">
+						  <textarea class="form-control" rows="4" required></textarea>
+						</div>
+					  </div>
+
+					  <!-- Termos -->
+					  <div class="row mb-2">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox" id="termos" required>
+							<label class="form-check-label">
+							  Li e aceito os termos e condições de uso
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Comunicações -->
+					  <div class="row mb-3">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox">
+							<label class="form-check-label">
+							  Aceito receber comunicações da Firjan
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Botão -->
+					  <div class="row">
+						<div class="col-md-8 offset-md-4">
+							<button type="submit" class="btn btn-history">
+								Enviar
+							</button>
+						</div>
+					  </div>
+
+					</form>
+
+					<div id="mensagemSucesso" class="alert alert-success mt-3" style="display:none;">
+					  Mensagem enviada com sucesso! Retornaremos seu contato em breve.
+					</div>
+
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+		
+		
+		
+	
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab PROCEL | Fase 1</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root { --color-primary: #0056b3; --color-secondary: #00a859; --color-accent: #9fe510; --color-dark: #0A1725; --bg-light: #f8f9fa; --text-main: #333333; --text-muted: #666666; --font-main: "Segoe UI", Roboto, Arial, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: var(--font-main); color: var(--text-main); line-height: 1.6; background: #fff; } a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; padding: 15px 0; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        nav ul { display: flex; gap: 20px; align-items: center; list-style: none; } nav a { font-weight: 600; color: var(--text-main); font-size: 0.95rem; text-transform: uppercase; } nav a:hover, nav a.active { color: var(--color-primary); }
+        
+        /* Chamada Header Specific */
+        .call-header { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%); color: #fff; padding: 80px 0; }
+        .breadcrumb { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
+        .breadcrumb a:hover { color: var(--color-accent); text-decoration: underline;}
+        .call-header h1 { font-size: 3rem; color: var(--color-accent); margin-bottom: 10px; }
+
+        .video-grid { display: grid; gap: 40px; padding: 60px 0; }
+        .video-card { background: var(--bg-light); padding: 20px; border-radius: 8px; border: 1px solid #eee; text-align: center;}
+        .video-card h3 { margin-bottom: 15px; font-size: 1.2rem; color: var(--color-primary); }
+        .video-placeholder { width: 100%; aspect-ratio: 16/9; background: #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #888; font-weight: bold; }
+        
+        .action-box { text-align: center; padding: 60px; background: var(--bg-light); border-radius: 8px; margin: 40px 0;}
+        .btn-large { background: var(--color-secondary); color: #fff; padding: 15px 40px; font-size: 1.2rem; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-top: 20px;}
+    
+		/* Grid Central para os cards das Chamadas (Atendendo aos 3 cliques) */
+        .chamadas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .chamada-card { background: #fff; padding: 40px 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid var(--color-secondary); transition: 0.3s;}
+        .chamada-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .chamada-card h3 { font-size: 1.5rem; color: var(--color-primary); margin-bottom: 15px; }
+        .chamada-card p { color: var(--text-muted); margin-bottom: 25px; }
+        .btn-chamada { display: inline-block; background: var(--color-dark); color: #fff; padding: 12px 25px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .btn-chamada:hover { background: var(--color-primary); }
+	
+	
+		/* NÚMEROS */
+		.stats-section {
+			padding: 60px 0;
+			text-align: center;
+		}
+
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 30px;
+			margin-top: 30px;
+		}
+
+		.stat-box {
+			background: var(--bg-light);
+			padding: 30px 20px;
+			border-radius: 8px;
+			border: 1px solid #eee;
+		}
+
+		.stat-number {
+			font-size: 2.5rem;
+			font-weight: bold;
+			color: var(--color-secondary);
+		}
+
+		.stat-label {
+			margin-top: 10px;
+			color: var(--text-muted);
+			font-size: 0.95rem;
+		}
+
+		/* LOGOS */
+		.logos-section {
+			padding: 60px 0;
+			text-align: center;
+		}
+
+		.logos-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+			gap: 30px;
+			margin-top: 30px;
+			align-items: center;
+		}
+
+		.logo-item {
+			background: #fff;
+			padding: 15px;
+			border-radius: 8px;
+			border: 1px solid #eee;
+			transition: 0.3s;
+		}
+
+		.logo-item:hover {
+			transform: scale(1.05);
+		}
+
+		.logo-item img {
+			max-width: 100%;
+			max-height: 60px;
+			object-fit: contain;
+			filter: grayscale(100%);
+			opacity: 0.8;
+		}
+
+		.logo-item img:hover {
+			filter: grayscale(0%);
+			opacity: 1;
+		}
+	
+	 /* =========================================
+           9. FOOTER CORPORATIVO
+           ========================================= */
+        footer {
+            background-color: var(--color-dark);
+            color: #ffffff;
+            padding: 10px 0 2px;
+        }
+
+
+
+		.footer-grid {
+			display: grid;
+			gap: 40px;
+			margin-bottom: 0px;
+			grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-col h4 { color: var(--color-accent); margin-bottom: 5px; font-size: 1.2rem; }
+        .footer-col p { opacity: 0.8; margin-bottom: 5px; font-size: 0.95rem; }
+        .footer-bottom { text-align: center; padding-top: 0px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.5; font-size: 0.85rem; }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px) {
+            .about-grid, .edital-grid, .footer-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; } /* Simulação de menu escondido no mobile */
+            .hero h1 { font-size: 2.2rem; }
+        }
+		
+		.paragrafos_fase1{
+			margin-top: 60px;
+		}
+	
+	</style>
+</head>
+<body>
+
+    <header>
+		  <div class="container">
+			<nav class="navbar navbar-expand-lg" style="width: 100%;">
+
+			  <!-- LOGO (esquerda) -->
+			  <a class="navbar-brand" href="index.html">
+				<img src="https://i.ibb.co/F1dxm7j/Artboard-2logos.png" style="height: 50px;">
+			  </a>
+
+			  <!-- BOTÃO HAMBÚRGUER -->
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <!-- MENU (direita) -->
+			  <div class="collapse navbar-collapse" id="menuNav">
+				<ul class="navbar-nav ms-auto">
+				  <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase2.html">Fase 2 - 2026</a></li>
+				  <li class="nav-item"><a class="nav-link" href="fase1.html">Fase 1 - 2020</a></li>
+				  <li class="nav-item"><a class="nav-link" href="imprensa.html">Imprensa</a></li>
+				  <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalContato">
+					  Fale Conosco
+					</a>
+				  </li>
+				</ul>
+			  </div>
+
+			</nav>
+		  </div>
+	</header>
+
+   <div class="row">
+	  <div class="col-12 position-relative" style="background: #4f7e25">
+
+		<!-- IMAGEM -->
+		<img src="banner_fase1.png" class="img-fluid w-100" style="opacity: 0.5"/>
+
+		<!-- TEXTO SOBREPOSTO -->
+		<div class="position-absolute top-50 start-0 translate-middle-y w-100">
+		  <div class="container">
+			<div class="row">
+			  <div class="col-10 col-md-8 col-lg-6 text-white" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6);">
+				<h1 class="fw-bold">Fase 1 - 2020</h1>
+				<p>Edição 2020</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+    <main class="container">
+        
+		<div class="paragrafos_fase1">
+			<p>O Lab Procel é um programa para o desenvolvimento de processos de aceleração e pré-aceleração em inovação tecnológica e de negócios em eficiência energética, resultado da parceria entre a Eletrobras/Procel e o SENAI-RJ.</p> 
+			<p>Lançado em abril de 2020, com uma série de quatro chamadas públicas, tem como objetivo fomentar e intermediar oportunidades para o desenvolvimento de projetos junto a startups, micro e pequenas empresas e equipes de pessoas físicas com projetos inovadores, conforme a proposta de cada chamada. Assim, o Lab Procel trabalha no sentido de viabilizar o acesso de toda a sociedade a soluções e produtos inovadores com ênfase na eficiência energética.</p>
+		</div>
+		
+        <!-- MATERIAIS DE APOIO DA CHAMADA -->
+        <div class="video-grid">
+            <div class="video-card">
+                <h3>Vídeo do Evento</h3>
+                <!-- Aqui entraria a tag <video> real -->
+                <div><iframe width="700" height="400" src="https://www.youtube.com/embed/xyJ53oS9jAE?si=tbLIjDk0Okfa7NDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            </div>
+        </div>
+		
+		
+		<section class="section-box container">
+            <div style="text-align: center;"><h2 class="section-title">Histórico das Chamadas</h2></div>
+            
+            <div class="chamadas-grid">
+                <!-- CHAMADA 1 (O Link de 3 cliques funciona aqui) -->
+                <div class="chamada-card">
+                    <h3>Chamada 1</h3>
+                    <p>Aceleração de Soluções Inovadoras com Ênfase em Eficiência Energética no Saneamento Ambiental</p>
+                    <a href="https://eletrobras.com/pt/Paginas/LabProcel1.aspx" class="btn-chamada" target="_blank">Veja como foi</a>
+                </div>
+                
+                <!-- CHAMADA 2 e 3 seriam estruturalmente idênticas à Chamada 1 -->
+                <div class="chamada-card">
+                    <h3>Chamada 2</h3>
+                    <p>Aceleração de Soluções Inovadoras com Ênfase em Eficiência Energética com Aplicações Generalistas nos Setores Residencial, Comercial, Industrial, de Serviços e Público</p>
+                    <a href="https://eletrobras.com/pt/Paginas/LabProcel2.aspx" class="btn-chamada" target="_blank">Veja como foi</a>
+                </div>
+                
+                <div class="chamada-card">
+                    <h3>Chamada 3</h3>
+                    <p>Programa de Pré-Aceleração de soluções inovadoras em eficiência energética</p>
+                    <a href="https://eletrobras.com/pt/Paginas/LabProcel3.aspx" class="btn-chamada" target="_blank">Veja como foi</a>
+                </div>
+            </div>
+        </section>
+
+		
+		
+		
+		<!-- NÚMEROS DA FASE -->
+		<section class="stats-section">
+			<h2 style="color: var(--color-dark);">Números do Lab Procel Fase 1 - 2020</h2>
+
+			<div class="stats-grid">
+				<div class="stat-box">
+					<div class="stat-number">94</div>
+					<div class="stat-label">Startups Inscritas</div>
+				</div>
+				<div class="stat-box">
+					<div class="stat-number">14</div>
+					<div class="stat-label">Startups Certificadas</div>
+				</div>
+				<div class="stat-box">
+					<div class="stat-number">R$ 15M</div>
+					<div class="stat-label">Investidos</div>
+				</div>
+				<div class="stat-box">
+					<div class="stat-number">24</div>
+					<div class="stat-label">Meses de Duração</div>
+				</div>
+			</div>
+		</section>
+
+
+	<!-- LOGOS DAS STARTUPS -->
+	<section class="logos-section">
+		<h2 style="color: var(--color-dark);">Startups Participantes</h2>
+
+		<div class="logos-grid">
+			<div class="logo-item"><a href="https://luming.com.br/" target="_blank"><img src="logo_luming.png" alt="Luming"></a></div>
+			<div class="logo-item"><a href="https://disporenergia.com.br/" target="_blank"><img src="logo_dispor_energia.png" alt="Dispor Energia"></a></div>
+			<div class="logo-item"><a href="https://www.bettahidroturbinas.com.br/" target="_blank"><img src="logo_betta.png" alt="Betta Hidroturbinas"></a></div>
+			<div class="logo-item"><a href="https://www.greenant.com.br/" target="_blank"><img src="logo_greenant.png" alt="Greenant"></a></div>
+			<div class="logo-item"><a href="https://hidreo.com.br/" target="_blank"><img src="logo_hidreo.png" alt="Hidreo"></a></div>
+			<div class="logo-item"><a href="https://www.mintconsultoria.com.br/" target="_blank"><img src="logo_mint.png" alt="Mint Consultoria"></a></div>
+			<div class="logo-item"><a href="https://www.methanum.com/" target="_blank"><img src="logo_methanum.png" alt="Methanum Energia & Resíduos"></a></div>
+		</div>
+			
+		<div class="logos-grid">
+			<div class="logo-item"><a href="http://www.deepambiente.com.br/pt/sobre-nos/" target="_blank"><img src="logo_deepambiente.png" alt="Deep Ambiente"></a></div>
+			<div class="logo-item"><a href="https://www.ekonowater.com/" target="_blank"><img src="logo_ew.png" alt="Ekono Water"></a></div>
+			<div class="logo-item"><a href="http://www.siitec.com/" target="_blank"><img src="logo_sii_smart.png" alt="SiiSmart"></a></div>
+			<div class="logo-item"><a href="" target="_blank"><img src="logo_teletec_tecnologia.png" alt="Teletec Tecnologia"></a></div>
+			<div class="logo-item"><a href="" target="_blank"><img src="logo_harmonics.png" alt="Tech Harmonics"></a></div>
+			<div class="logo-item"><a href="" target="_blank"><img src="logo_pegasus.png" alt="Pegasus"></a></div>
+			<div class="logo-item"><a href="" target="_blank"><img src="logo_infoe.png" alt="Info E"></a></div>
+		</div>
+	</section>
+		
+       
+    </main>
+
+		<!-- FOOTER ESTILO FIRJAN/IEL -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Fale com a Firjan</h4>
+                    <p>Segunda à sexta-feira, de 9h às 18h</p>
+                    <p><strong>4002 0231</strong> (Custo de Ligação local)</p>
+                </div>
+                <div class="footer-col">
+                    <p><strong>0800 0231 231</strong> <span style="font-size: 0.80rem;">(Ligações gratuitas de telefone fixo no RJ)</span></p>
+                    <p>Email: <a href="mailto:labprocel@firjan.com.br" style="text-decoration: underline;">labprocel@firjan.com.br</a></p>
+					<p style="font-size: 0.80rem;">&copy; 2026 - Todos os direitos reservados à Firjan e Lab PROCEL.</p>
+				</div>
+				<div class="footer-col">
+                    <p><a href="https://www.linkedin.com/company/empresa-brasileira-de-participa%C3%A7%C3%B5es-em-energia-nuclear-e-binacional-s-a-enbpar" target="_blank">LinkedIn ENBPar</a></p>
+                    <p><a href="https://www.instagram.com/enbpar" target="_blank">Instagram ENBPar</a></p>
+                    <p><a href="https://www.linkedin.com/company/firjan" target="_blank">LinkedIn Firjan</a></p>
+                    
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		<!--PARTE DO MODAL DO FALE CONOSCO -->
+		<div class="modal fade" id="modalContato" tabindex="-1">
+			  <div class="modal-dialog modal-lg">
+				<div class="modal-content glass-card" style="background: #ddd; color: #000">
+
+				  <div class="modal-header">
+					<h5 class="modal-title">Fale Conosco</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				  </div>
+
+				  <div class="modal-body">
+
+					<form id="formContato">
+
+					  <!-- Nome Completo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome Completo</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Organização -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Nome da Organização</label>
+						<div class="col-md-8">
+						  <input type="text" class="form-control">
+						</div>
+					  </div>
+
+					  <!-- Email -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">E-mail</label>
+						<div class="col-md-8">
+						  <input type="email" class="form-control" required>
+						</div>
+					  </div>
+
+					  <!-- Celular -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Celular</label>
+						<div class="col-md-8">
+						  <input type="text" id="celular" class="form-control" placeholder="(00) 00000-0000" required>
+						</div>
+					  </div>
+
+					  <!-- Motivo -->
+					  <div class="row mb-3 align-items-center">
+						<label class="form-label col-md-4 mb-0">Motivo do Contato</label>
+						<div class="col-md-8">
+						  <select class="form-select" required>
+							<option value="">Selecione</option>
+							<option>Dúvidas</option>
+							<option>Sugestões</option>
+							<option>Outros</option>
+						  </select>
+						</div>
+					  </div>
+
+					  <!-- Mensagem -->
+					  <div class="row mb-3">
+						<label class="form-label col-md-4">Deixe sua mensagem</label>
+						<div class="col-md-8">
+						  <textarea class="form-control" rows="4" required></textarea>
+						</div>
+					  </div>
+
+					  <!-- Termos -->
+					  <div class="row mb-2">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox" id="termos" required>
+							<label class="form-check-label">
+							  Li e aceito os termos e condições de uso
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Comunicações -->
+					  <div class="row mb-3">
+						<div class="col-md-8 offset-md-4">
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox">
+							<label class="form-check-label">
+							  Aceito receber comunicações da Firjan
+							</label>
+						  </div>
+						</div>
+					  </div>
+
+					  <!-- Botão -->
+					  <div class="row">
+						<div class="col-md-8 offset-md-4">
+							<button type="submit" class="btn btn-history">
+								Enviar
+							</button>
+						</div>
+					  </div>
+
+					</form>
+
+					<div id="mensagemSucesso" class="alert alert-success mt-3" style="display:none;">
+					  Mensagem enviada com sucesso! Retornaremos seu contato em breve.
+					</div>
+
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+		
+		
+		
+	
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
